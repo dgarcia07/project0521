@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Administrator;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use App\Models\City;
+use App\Models\City, App\Models\Client;
 
 class CitiesController extends Controller
 {
@@ -95,14 +95,24 @@ class CitiesController extends Controller
    public function destroy($id)
    {
       try {
-         $cities = City::find($id);
-         $cities->delete();
 
-         return response()->json([
-            'code' => 200,
-            'data' => [],
-            'message' => 'Ciudad eliminada correctamente!'
-         ], 200);
+         $existClient = Client::where('city', $id)->exists();
+         if (!$existClient) {
+            $cities = City::find($id);
+            $cities->delete();
+
+            return response()->json([
+               'code' => 200,
+               'data' => [],
+               'message' => 'Ciudad eliminada correctamente!'
+            ], 200);
+         }else{
+            return response()->json([
+               'code' => 400,
+               'data' => [],
+               'message' => 'No es posible eliminar la ciudad'
+            ], 200);
+         }
       } catch (\Exception $e) {
          return response()->json([
             'code' => 400,

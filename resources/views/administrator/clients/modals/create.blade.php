@@ -2,7 +2,7 @@
 <div class="modal fade" id="idAddClient" tabindex="-1" role="dialog" aria-labelledby="idAddClientTitle" aria-hidden="true">
    <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
-         <form action="{{route('clients.store')}}" method="post">
+         <form action="{{route('clients.store')}}" method="post" enctype="multipart/form-data">
             @csrf
             <div class="modal-header">
                <h5 class="modal-title" id="exampleModalLongTitle">Crear cliente</h5>
@@ -29,6 +29,10 @@
                      @endforeach
                   </select>
                   {{-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> --}}
+               </div>
+               <div class="form-group">
+                  <label for="idFile">Imagen</label>
+                  <input type="file" name="image" class="form-control" id="idFile">
                </div>
                <div class="form-group">
                   <label for="idState">Estado</label>

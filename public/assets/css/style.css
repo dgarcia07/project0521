@@ -1,3 +1,9 @@
 .cardTable .table-responsive{
    overflow: auto;
 }
+
+.img-clients{
+   width: 50px;
+   object-position: center;
+   object-fit: cover;
+}

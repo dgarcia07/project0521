@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Administrator;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use App\Models\Client;
 use App\Models\City;
 
@@ -28,6 +29,7 @@ class ClientsController extends Controller
          'name' => 'required',
          'city' => 'required|exists:cities,id',
          'state' => 'required',
+         'image' => 'image'
       ],[
          'cod.required' => 'El campo codigo es obligatorio.',
          'cod.unique' => 'El valor del campo codigo ya está en uso.',
@@ -35,14 +37,19 @@ class ClientsController extends Controller
          'city.required' => 'El campo ciudad es obligatorio.',
          'city.exists' => 'El valor ingresado no existe.',
          'state.required' => 'El campo estado es obligatorio.',
+         'image.image' => 'Debe enviar una imagen'
       ]);
 
       try {
+
+         $imgName = $request->image->store('images', 'public');
+
          DB::table('clients')->insert([
             'cod' => $request->cod,
             'name' => $request->name,
             'city' => $request->city,
-            'state' => $request->state
+            'image' => $imgName,
+            'state' => $request->state,
          ]);
 
          session()->flash('success', 'Cliente agregado correctamente');

@@ -196,6 +196,8 @@
                            location.reload();
                         }
                      })
+                  }else{
+                     alert(response.message);
                   }
                },
                error: function(xhr){}

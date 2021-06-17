@@ -108,6 +108,7 @@
                <div class="table-responsive ">
                   <table class="table">
                      <thead class=" text-primary">
+                        <th>Imagen</th>
                         <th>Codigo</th>
                         <th>Nombre</th>
                         <th>Ciudad</th>
@@ -118,6 +119,9 @@
                         @if (count($clients)>0)
                            @foreach ($clients as $key => $client)
                               <tr>
+                                 <td>
+                                    <img src="storage/{{$client->image}}" alt="" class="img-clients">
+                                 </td>
                                  <td>{{$client->cod}}</td>
                                  <td>{{$client->name}}</td>
                                  <td>
